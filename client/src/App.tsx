@@ -1,14 +1,18 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
-import { BackendService } from "@genezio-sdk/genezio-project";
 import "./App.css";
+import { HELLO_WORLD_FUNCTION_URL } from "./constants";
 
 export default function App() {
   const [name, setName] = useState("");
   const [response, setResponse] = useState("");
 
   async function sayHello() {
-    setResponse(await BackendService.hello(name));
+    console.log(import.meta.env.VITE_MY_TEST);
+    const res = await fetch(
+      `${HELLO_WORLD_FUNCTION_URL}?name=${name}`
+    );
+    setResponse(await res.text());
   }
 
   return (
@@ -26,7 +30,7 @@ export default function App() {
             alt="Genezio Logo"
           />
         </a>
-        <a href="https://react.dev" target="_blank">
+        <a href="https://react.dev" target="_blank">``
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
